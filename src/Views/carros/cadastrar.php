@@ -69,12 +69,6 @@
 
 <script>
     document.getElementById('InputAno').addEventListener('input', function (e) {
-        if (e.target.value > 2100) {
-            e.target.value = 2100;
-        }
-
-        if (e.target.value < 1900) {
-            e.target.value = 1900;
-        }
+        
     });
 </script>
