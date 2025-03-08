@@ -33,11 +33,22 @@ class CarroController {
 
     public function salvar(Request $request) {
 
-        $post = $_POST;
-        
-        Carro::salvarCarros($post);
+        $post = $request->getBody();
 
-        header('Location: /carros/cadastrar');
-        exit();
+        if (!empty($id)) {
+
+            Carro::alterarCarros($post); 
+        } else {
+
+            $post['id'] = Carro::salvarCarros($post);
+        }
+
+        return View::render(
+            'carros.cadastrar', 
+            ['dados' => $post], 
+            'adm'
+        );
     }
+    
+
 }

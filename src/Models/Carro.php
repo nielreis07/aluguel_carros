@@ -55,7 +55,8 @@ class Carro {
     
             $stmt->execute();
             
-            return true;
+            // RETORNA O ÚLTIMO ID INSERIDO
+            return Database::getConnection()->lastInsertId();
 
         } catch (PDOException $e) {
             echo $e->getMessage();
