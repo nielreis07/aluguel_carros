@@ -1,12 +1,25 @@
 <div class="container">
-    <h2>Cadatrar Veículos <?php echo $dados['id'] ?? 'N/A' ?></h2>
-    <?php echo $helper->formataPreco($dados['preco']) ?>
+    <h2>Cadastrar Veículos <?php echo $dados['id'] ?? 'N/A' ?></h2>
 </div>
 <div class="container">
+    <?php if (!empty($mensagem)): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $mensagem ?>
+            <button type="button" class="btn-close" 
+            data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <a href="/carros" class="btn btn-primary">Voltar</a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <div class="card p-3">
-                <form action="/carros/salvar" method="post">
+                <form action="/carros/salvar" method="post" id="formCadastrarCarro">
                     <input type="hidden" name="id" value="<?php echo $dados['id'] ?? '' ?>">
                     <div class="mb-3">
                         <label for="InputModelo" class="form-label">Modelo</label>
@@ -59,8 +72,8 @@
                          class="form-control" id="InputImagem" placeholder="Inserir">
                         <div id="imagemHelp" class="form-text">Insira a Url</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-secondary" onclick="limparFormulario()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarCarro()">Enviar</button>
                 </form>
             </div>
         </div>
@@ -68,7 +81,45 @@
 </div>
 
 <script>
-    document.getElementById('InputAno').addEventListener('input', function (e) {
-        
-    });
+function limparFormulario() {
+    if (confirm("Tem certeza que deseja cancelar e limpar os campos?")) {
+        const form = document.getElementById("formCadastrarCarro");
+        document.getElementById("InputModelo").value = "";
+        document.getElementById("InputMarca").value = "";
+        document.getElementById("InputAno").value = "";
+        document.getElementById("InputPlaca").value = "";
+        document.getElementById("SelectStatus").value = "Selecione";
+        document.getElementById("InputPreco").value = "";
+        document.getElementById("InputImagem").value = "";
+    }
+}
+
+function salvarCarro() {
+    event.preventDefault();
+    const msgErrors = [];
+    
+    const InputModelo = document.getElementById("InputModelo").value;
+    const InputMarca = document.getElementById("InputMarca").value;
+    const InputAno = document.getElementById("InputAno").value;
+    const InputPlaca = document.getElementById("InputPlaca").value;
+    const SelectStatus = document.getElementById("SelectStatus").value;
+    const InputPreco = document.getElementById("InputPreco").value;
+    const InputImagem = document.getElementById("InputImagem").value;
+    
+    if (InputModelo === "")  msgErrors.push("O campo Modelo é obrigatório.");
+    if (InputMarca === "")  msgErrors.push("O campo Marca é obrigatório.");
+    if (InputAno === "")  msgErrors.push("O campo Ano é obrigatório.");
+    if (InputPlaca === "")  msgErrors.push("O campo Placa é obrigatório.");
+    if (SelectStatus === "Selecione")  msgErrors.push("O campo Status é obrigatório.");
+    if (InputPreco === "")  msgErrors.push("O campo Preço é obrigatório.");
+    if (InputImagem === "")  msgErrors.push("O campo Imagem é obrigatório.");
+    
+    if (msgErrors.length > 0) {
+        alert(msgErrors.join("\n"));
+        return;
+    }
+
+    const form = document.getElementById("formCadastrarCarro");
+    form.submit();
+}
 </script>
