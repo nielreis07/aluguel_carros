@@ -16,13 +16,13 @@ Class FlashMessage {
         ];
     }
 
-    public static function get(string $key): string|null {
+    public static function get(string $key): array|null {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         $flash = null;
         if (isset($_SESSION['flash_message'][$key])) {
-            $flash = current($_SESSION['flash_message'][$key]);
+            $flash = $_SESSION['flash_message'][$key];
         }
         return $flash;
     }

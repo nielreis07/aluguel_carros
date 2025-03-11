@@ -16,6 +16,10 @@ class CarroController {
     }
 
     public function pesquisa() {
+
+    /*A função pesquisa() pega um termo digitado pelo usuário na URL, busca no banco de dados
+     os carros cujo modelo corresponda a esse termo e retorna uma página com os resultados.*/
+
         $pesquisa = isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '';
         $carros = CarrosModel::buscarCarrosPorModelo($pesquisa);
        
@@ -68,11 +72,11 @@ class CarroController {
             }
 
 
-    
+            FlashMessage::set('mensagem', 'Carro salvo com sucesso!');
             header('Location: /carros/cadastrar/' . $post['id']);
             exit;
         } catch (\Exception $e) {
-            FlashMessage::set('mensagem', $e->getMessage(), 'error');
+            FlashMessage::set('mensagem', $e->getMessage(), 'danger');
 
             header('Location: /carros/cadastrar/' . $post['id']);
             exit;

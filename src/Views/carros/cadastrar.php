@@ -3,8 +3,8 @@
 </div>
 <div class="container">
     <?php if (!empty($mensagem)): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo $mensagem ?>
+        <div class="alert alert-<?php echo $mensagem['type'] ?> alert-dismissible fade show" role="alert">
+            <?php echo $mensagem['message'] ?>
             <button type="button" class="btn-close" 
             data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
