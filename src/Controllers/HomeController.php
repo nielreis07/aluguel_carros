@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\View;
-use App\Models\Carro;
+use App\Models\CarrosModel;
 use App\Models\User;
 
 class HomeController
@@ -13,7 +13,7 @@ class HomeController
         $usuarios = User::getAll();
 
         $pesquisa = isset($_GET['pesquisa']) ? $_GET['pesquisa'] : '';
-        $carros = Carro::buscarCarrosPorModelo($pesquisa);
+        $carros = CarrosModel::buscarCarrosPorModelo($pesquisa);
 
         return View::render('home.index', ['title' => '', 'usuarios' => $usuarios, 'carros' => $carros]);
     }

@@ -4,6 +4,9 @@ namespace App\Routes;
 
 use App\Controllers\CarroController;
 use App\Controllers\ClienteController;
+use App\Controllers\HomeController;
+
+$router->get('/', [HomeController::class, 'index']);
 
 $router->get('/carros', [CarroController::class, 'index']);
 $router->get('/carros/buscar', [CarroController::class, 'pesquisa']);
