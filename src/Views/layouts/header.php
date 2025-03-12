@@ -4,7 +4,8 @@
 
     <?php 
     include_once __DIR__ . '/top.php'; 
+    
     include_once __DIR__ . '/slide.php'; 
-    include_once __DIR__ . '/highlight.php'; 
+    include_once __DIR__ . '/highlight.php';
     ?>
 </header>

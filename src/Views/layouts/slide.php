@@ -27,5 +27,5 @@
     </div>
 </div>
 <?php foreach ($slides as $slide): ?>
-    <img src="<?= $slide ?>" alt="Slide">
+    <img src="<?= $slide ?>" alt="">
 <?php endforeach; ?>
