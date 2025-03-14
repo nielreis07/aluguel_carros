@@ -69,7 +69,7 @@ class ClientesModel
     public static function inserir($cliente)
     {
         try {
-            dd($cliente);
+
             $sql = "INSERT INTO clientes (nome_completo, data_nascimento, cpf, cnh, email, telefone, endereco) 
                 VALUES (:nome_completo, :data_nascimento, :cpf, :cnh, :email, :telefone, :endereco)";
             $stmt = Database::getConnection()->prepare($sql);
